@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext", // CommonJS for Node.js compatibility
+    "target": "ESNext", // Keep targeting modern JavaScript
+    "outDir": "./dist", // Output directory
+    "rootDir": "./src", // Root directory for your source code
+    "esModuleInterop": true, // Ensures compatibility with CommonJS/ESM
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
