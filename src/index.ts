@@ -25,6 +25,7 @@ async function main() {
     argv.single,
     argv.css
   );
+  
   if (argv.live && !argv.watch) {
     console.log(
       chalk.yellow(

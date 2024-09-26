@@ -1,7 +1,7 @@
 {
     "watch": true,
     "css": [
-        "tmp/style.css"
+        "tmp/input/style.css"
     ],
     "live": true,
     "port": 8080

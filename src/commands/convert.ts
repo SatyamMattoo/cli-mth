@@ -61,9 +61,7 @@ export async function convertMarkdownToHTML(
       })
       .map(
         (cssFile) =>
-          `<link rel="stylesheet" type="text/css" href="${path.dirname(
-            inputFilePath
-          )}/${cssFile}">`
+          `<link rel="stylesheet" type="text/css" href="${cssFile}">`
       )
       .join("\n");
 

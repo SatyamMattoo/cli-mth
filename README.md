@@ -22,6 +22,25 @@ This will install the mth-cli command globally on your system.
 
 ## Usage
 
+## Using a Configuration File - mthclirc.json
+Create a `mthclirc.json` file in the root of your project.
+To simplify the command line usage, you can use the configuration file instead of using flags:
+
+```js
+{
+    "watch": true,
+    "single": false,
+    "template":"path/to/template.html",
+    "css": [
+        "./styles.css"
+    ],
+    "live": true,
+    "port": 8080
+}
+```
+
+The CLI requires atleast two argumnents: `inputDir` and `outputDir`.
+
 ### Basic Command
 
 ```bash
@@ -43,25 +62,6 @@ mth-cli <inputDir> <outputDir> [options]
 | `--port`     | `-p`  | Port number for the live server       | `8080`                      |
 | `--help`     |       | Show help                             |                             |
 | `--version`  |       | Show version number                   |                             |
-
-## Using a Configuration File - mthclirc.json
-
-To simplify the command line usage, you can use the configuration file (mthclirc.json) instead of using flags:
-
-```js
-{
-    "watch": true,
-    "single": false,
-    "template":"path/to/template.html",
-    "css": [
-        "./styles.css"
-    ],
-    "live": true,
-    "port": 8080
-}
-```
-
-The CLI requires atleast two argumnents: `inputDir` and `outputDir`.
 
 ## Examples
 
