@@ -1,0 +1,8 @@
+{
+    "watch": true,
+    "css": [
+        "tmp/styles.css","tmp/jass/styles.css"
+    ],
+    "live": true,
+    "port": 8080
+}

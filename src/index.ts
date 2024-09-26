@@ -1,32 +1,41 @@
 #!/usr/bin/env node
+import chalk from "chalk";
 
-import { parseArguments } from './cli.js';
-import { processFiles } from './converter.js';
-import { watchFiles } from './watcher.js';
-import { readFile } from './utils.js';
-import * as path from 'path';
-import chalk from 'chalk';
+import { parseArguments } from "./cli.js";
+import { watchFiles } from "./commands/watcher.js";
+import { processFiles } from "./commands/convert.js";
+import { templateLoader } from "./template/template.js";
 
 async function main() {
-  const argv = parseArguments();
-
+  // Load arguments
+  const argv = await parseArguments();
   // Load template
-  let template = '<html><body>{{content}}</body></html>';
-  if (argv.template) {
-    try {
-      template = await readFile(path.resolve(argv.template));
-    } catch (err: any) {
-      console.error(chalk.red(`Error reading template file: ${err.message}`));
-      process.exit(1);
-    }
-  }
-
+  let template = await templateLoader(argv);
   // Convert files
-  await processFiles(argv.inputDir, argv.outputDir, template, argv.single);
-
+  await processFiles(
+    argv.inputDir,
+    argv.outputDir,
+    template,
+    argv.single,
+    argv.css
+  );
+  if (argv.live && !argv.watch) {
+    console.log(
+      chalk.yellow(
+        "You need to watch for changes in order to use live server. Use --watch or -w flag to do that."
+      )
+    );
+  }
   // Watch if necessary
   if (argv.watch) {
-    watchFiles(argv.inputDir, argv.outputDir, template);
+    await watchFiles(
+      argv.inputDir,
+      argv.outputDir,
+      argv.live,
+      argv.port,
+      argv.css,
+      template
+    );
   }
 }
 

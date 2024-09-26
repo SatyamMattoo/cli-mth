@@ -8,7 +8,7 @@ build/
 *.js.map
 
 # Temporary test files
-./tmp
+tmp
  
 # Logs
 logs/
