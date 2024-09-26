@@ -15,7 +15,7 @@
 First, install the package globally using npm:
 
 ```bash
-npm install -g my-mth-cli
+npm install -g mth-live-cli
 ```
 
 This will install the mth-cli command globally on your system.
