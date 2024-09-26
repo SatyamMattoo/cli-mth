@@ -2,8 +2,8 @@ import * as fs from "fs";
 import * as path from "path";
 import { marked } from "marked";
 
-import { readFile, writeFile } from "../utils.js";
 import { getFilesByExtension } from "./utils.js";
+import { readFile, writeFile } from "../utils.js";
 
 /**
  * Copy CSS files from the input directory to the output directory.
