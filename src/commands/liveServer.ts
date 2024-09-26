@@ -4,7 +4,8 @@ import * as path from "path";
 import { WebSocketServer } from "ws";
 import { createServer, IncomingMessage, ServerResponse } from "http";
 
-import { serveFile, generateDirectoryListing, fullHTML } from "./utils.js";
+import { fullHTML } from "./template/default.js";
+import { serveFile, generateDirectoryListing } from "./utils.js";
 
 /**
  * Starts an HTTP server and a WebSocket server for live reloading.

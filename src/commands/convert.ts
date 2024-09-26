@@ -4,6 +4,7 @@ import { marked } from "marked";
 
 import { getFilesByExtension } from "./utils.js";
 import { readFile, writeFile } from "../utils.js";
+import { defaultHTML } from "./template/default.js";
 
 /**
  * Copy CSS files from the input directory to the output directory.
@@ -34,16 +35,26 @@ export async function copyCssFiles(inputDir: string, outputDir: string) {
   }
 }
 
+/**
+ * Converts a Markdown file to HTML and saves the result to a specified output file.
+ *
+ * @param {string} inputFilePath - The path to the Markdown file to convert.
+ * @param {string} outputFilePath - The path to the output HTML file.
+ * @param {string} template - The path to the HTML template file.
+ * @param {string[]} [cssFiles=[]] - An array of CSS file paths to include in the output HTML.
+ * @return {Promise<void>} - A promise that resolves when the conversion is complete.
+ * @throws {Error} - If there is an error reading the Markdown file, the HTML template file, or writing the output file.
+ */
 export async function convertMarkdownToHTML(
   inputFilePath: string,
   outputFilePath: string,
   template: string,
   cssFiles: string[] = []
-) {
+): Promise<void> {
   try {
     const markdown = await readFile(inputFilePath);
     const htmlContent = marked(markdown);
-    const websocketScript = await readFile("src/template/websocket.ts");
+    const websocketScript = await readFile("src/commands/template/websocket.ts");
     let cssLinks = cssFiles
       .filter((cssFile) => {
         return path.dirname(inputFilePath) === path.dirname(cssFile);
@@ -56,7 +67,7 @@ export async function convertMarkdownToHTML(
       )
       .join("\n");
 
-    const fullHtml = template
+    const fullHtml = defaultHTML
       .replace("{{content}}", htmlContent as string)
       .replace("{{title}}", path.basename(outputFilePath, ".html"))
       .replace("{{script}}", websocketScript)
@@ -68,6 +79,16 @@ export async function convertMarkdownToHTML(
   }
 }
 
+/**
+ * Processes Markdown files and converts them to HTML.
+ *
+ * @param {string} inputDir - The directory containing Markdown files or a single Markdown file.
+ * @param {string} outputDir - The directory where the converted HTML files will be saved.
+ * @param {string} template - The path to a custom HTML template.
+ * @param {boolean} single - Indicates whether to convert a single Markdown file.
+ * @param {string[]} [css] - An array of CSS file paths to include in the output HTML.
+ * @return {Promise<void>} - A promise that resolves when the processing is complete.
+ */
 export async function processFiles(
   inputDir: string,
   outputDir: string,

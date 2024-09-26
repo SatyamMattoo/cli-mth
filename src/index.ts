@@ -4,8 +4,14 @@ import chalk from "chalk";
 import { parseArguments } from "./cli.js";
 import { watchFiles } from "./commands/watcher.js";
 import { processFiles } from "./commands/convert.js";
-import { templateLoader } from "./template/template.js";
+import { templateLoader } from "./commands/template/template.js";
 
+/**
+ * Asynchronously executes the main function.
+ * Loads arguments, loads template, converts files, and watches for changes if necessary.
+ *
+ * @return {Promise<void>} A promise that resolves when the function completes.
+ */
 async function main() {
   // Load arguments
   const argv = await parseArguments();

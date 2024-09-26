@@ -4,6 +4,12 @@ import { hideBin } from "yargs/helpers";
 import { readFile } from "./utils.js";
 import { Args } from "./types/index.js";
 
+/**
+ * Parses command-line arguments and merges them with configuration from .mthclirc.json.
+ *
+ * @return {Promise<Args>} An object containing the parsed command-line arguments and configuration.
+ * @throws {Error} If .mthclirc.json cannot be parsed or if it does not contain valid JSON.
+ */
 export const parseArguments = async (): Promise<Args> => {
   // Load configuration first
   const config = JSON.parse(await readFile(".mthclirc.json"));

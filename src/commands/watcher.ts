@@ -5,14 +5,28 @@ import { WebSocketServer } from "ws";
 
 import { startLiveServer } from "./liveServer.js";
 import { convertMarkdownToHTML } from "./convert.js";
+import { defaultHTML } from "./template/default.js";
 
+/*************  ✨ Codeium AI Suggestion  *************/
+/**
+ * Watches for changes in the specified input directory and converts changed Markdown files to HTML.
+ *
+ * @param {string} inputDir - The directory to watch for changes.
+ * @param {string} outputDir - The directory where the converted HTML files will be saved.
+ * @param {boolean} live - Whether to start a live server for real-time viewing.
+ * @param {number} [port] - The port number for the live server. Default is 8080.
+ * @param {string[]} [css] - An optional array of CSS files to include in the generated HTML.
+ * @param {string} [template=defaultHTML] - The HTML template to use for generating the HTML files. Default is the default HTML template.
+ * @return {Promise<void>} A promise that resolves when the function completes.
+ */
+/****  bot-99970ee3-8fc8-4ecb-b12b-f65bc53b2118  *****/
 export async function watchFiles(
   inputDir: string,
   outputDir: string,
   live: boolean,
   port?: number,
   css?: string[],
-  template = "<html><body>{{content}}</body></html>"
+  template = defaultHTML
 ): Promise<void> {
   console.log(chalk.blue(`Watching for changes in: ${inputDir}`));
 
